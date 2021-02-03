@@ -4,22 +4,12 @@
 
 <template>
   <div :class="$style.vMainWrapper">
-    <router-view></router-view>
-    <VCatalog />
-    <!-- <VCart v-if="CART.length" :cartData="CART" /> -->
+    <keep-alive><router-view /></keep-alive>
   </div>
 </template>
 
 <script>
-// import VCart from '../VCart/VCart';
-// import VCatalog from '../VCatalog/VCatalog';
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'VMainWrapper',
-  // components: { VCart, VCatalog },
-  computed: {
-    ...mapGetters(['CART']),
-  },
 };
 </script>

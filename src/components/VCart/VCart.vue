@@ -4,36 +4,61 @@
 
 <template>
   <div :class="$style.VCart">
+    <router-link to="/" :class="$style.linkToMain"
+      >Back to Catalog
+    </router-link>
     <h1>Cart</h1>
+    <p v-if="!CART.length">There are no products in cart...</p>
     <VCartItem
-      v-for="item in cartData"
+      v-for="item in CART"
       :key="item._id"
       :cartItemData="item"
       @deleteFromCart="deleteFromCart"
+      @incrementQuantity="incrementQuantity"
+      @decrementQuantity="decrementQuantity"
     />
+    <div :class="$style.total">
+      <p :class="$style.name">Total:</p>
+      <p>{{ cartTotalCost }} &#8381;</p>
+    </div>
   </div>
 </template>
 <script>
 import VCartItem from '../VCartItem/VCartItem';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'VCart',
   components: {
     VCartItem,
   },
-  props: {
-    cartData: {
-      type: Array,
-      default() {
-        return [];
-      },
+  computed: {
+    ...mapGetters(['CART']),
+    cartTotalCost() {
+      const { CART } = this;
+      let res = 0;
+      if (CART.length) {
+        CART.forEach((el) => {
+          res += el.quantity * el.price;
+        });
+      }
+      return res;
     },
   },
   methods: {
-    ...mapActions(['DELETE_FROM_CART']),
+    ...mapActions([
+      'DELETE_FROM_CART',
+      'DECREMENT_QUANTITY',
+      'INCREMENT_QUANTITY',
+    ]),
     deleteFromCart(data) {
       this.DELETE_FROM_CART(data);
+    },
+    incrementQuantity(index) {
+      this.INCREMENT_QUANTITY(index);
+    },
+    decrementQuantity(index) {
+      this.DECREMENT_QUANTITY(index);
     },
   },
 };

@@ -15,8 +15,12 @@
       <p>{{ cartItemData.article }}</p>
     </div>
     <div :class="$style.quantity">
-      <p>Qty</p>
-      {{ cartItemData.quantity }}
+      <p>Qty:</p>
+      <button @click="decrementQuantity()">-</button>
+      <span>
+        {{ cartItemData.quantity }}
+      </span>
+      <button @click="incrementQuantity()">+</button>
     </div>
     <button @click="deleteFromCart">Delete</button>
   </div>
@@ -32,12 +36,15 @@ export default {
       },
     },
   },
-  mounted() {
-    this.$set(this.cartItemData, 'quantity', 1);
-  },
   methods: {
     deleteFromCart() {
       this.$emit('deleteFromCart');
+    },
+    incrementQuantity() {
+      this.$emit('incrementQuantity');
+    },
+    decrementQuantity() {
+      this.$emit('decrementQuantity');
     },
   },
 };

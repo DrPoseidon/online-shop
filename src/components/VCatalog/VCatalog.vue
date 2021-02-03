@@ -4,11 +4,9 @@
 
 <template>
   <div :class="$style.vCatalog">
-    <router-link :to="{ name: 'cart', params: { cartData: CART } }"
-      ><div :class="$style.linkToCart">
-        Cart: {{ CART.length }}
-      </div></router-link
-    >
+    <router-link :to="{ name: 'cart' }" :class="$style.linkToCart">
+      Cart: {{ CART.length }}
+    </router-link>
     <h1>Catalog</h1>
     <div :class="$style.list">
       <VCatalogItem

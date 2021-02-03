@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import VMainWrapper from "./components/VMainWrapper/VMainWrapper";
+import VMainWrapper from './components/VMainWrapper/VMainWrapper';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     VMainWrapper,
   },

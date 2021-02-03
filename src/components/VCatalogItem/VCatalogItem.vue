@@ -22,6 +22,9 @@ export default {
   props: {
     productData: Object,
   },
+  mounted() {
+    this.$set(this.productData, 'quantity', 1);
+  },
   methods: {
     addToCart() {
       this.$emit('addToCart', this.productData);

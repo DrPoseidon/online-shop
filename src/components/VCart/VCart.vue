@@ -13,9 +13,9 @@
       v-for="item in CART"
       :key="item._id"
       :cartItemData="item"
-      @deleteFromCart="deleteFromCart"
-      @incrementQuantity="incrementQuantity"
-      @decrementQuantity="decrementQuantity"
+      @deleteFromCart="deleteFromCart(item)"
+      @incrementQuantity="increment(item)"
+      @decrementQuantity="decrement(item)"
     />
     <div :class="$style.total">
       <p :class="$style.name">Total:</p>
@@ -54,11 +54,11 @@ export default {
     deleteFromCart(data) {
       this.DELETE_FROM_CART(data);
     },
-    incrementQuantity(index) {
-      this.INCREMENT_QUANTITY(index);
+    increment(id) {
+      this.INCREMENT_QUANTITY(id);
     },
-    decrementQuantity(index) {
-      this.DECREMENT_QUANTITY(index);
+    decrement(id) {
+      this.DECREMENT_QUANTITY(id);
     },
   },
 };
